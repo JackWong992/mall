@@ -37,7 +37,16 @@
 题外话： 安装 `vue snippets`快速搭建vue模板
 
 ## 2.3 搜索栏布局
-
-
+### 2.3.1
+左侧logo：
+```
+  location引入：import '../../assets/styles/iconfont.css'
+  修改iconfont.css相对路径 
+```
+中间使用 `input`<br>
+右侧：
+```
+  van-button>size="mini"{查找} 
+```
 
 ## 2.4 轮播图制作
