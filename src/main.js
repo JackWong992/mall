@@ -5,9 +5,11 @@ import App from './App'
 import router from './router'
 import './assets/styles/reset.css'
 import './assets/styles/border.css'
-import {Button} from 'vant'
+import './assets/styles/iconfont.css'
 
-Vue.use(Button)
+import {Button, Col, Row} from 'vant'
+
+Vue.use(Button).use(Row).use(Col)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

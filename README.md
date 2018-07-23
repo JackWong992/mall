@@ -2,7 +2,11 @@
 
 > A Vue.js project
 
-## Build Setup
+## Project  Development / 项目开发过程 
+1.  [项目前置](https://github.com/JackWong992/mall/blob/master/Development%20diary/chapter%20One.md)
+2. [首页布局]()
+
+## Build Setup / 打包与上线
 
 ``` bash
 # install dependencies
@@ -18,4 +22,3 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
