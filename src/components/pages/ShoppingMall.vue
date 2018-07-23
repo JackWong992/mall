@@ -13,6 +13,14 @@
         </van-col>      
       </van-row>
     </div>
+  <!-- swiper area -->
+    <div class="swiper-area">
+      <van-swipe :autoplay="5000">
+        <van-swipe-item v-for="item in bannerPicArray" :key="item.id">
+          <img v-lazy="item.imageUrl" width="100%">
+        </van-swipe-item>
+      </van-swipe>
+    </div>
   </div>
 </template>
 
@@ -22,7 +30,20 @@
     data() {
       return {
         msg : 'Shopping Mall',
-        
+        bannerPicArray: [
+          { 
+            id: '001',
+            imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic001.jpg'
+            },
+          { 
+            id: '002',
+            imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic002.jpg'
+            },
+          { 
+            id: '003',
+            imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic003.jpg'
+            }
+        ]
       }
     }
   }
@@ -33,6 +54,7 @@
     line-height: 2.2rem;
     height: 2.2rem;
     background: #e5017d;
+    overflow: hidden;
   }
   .icon-loaction {
     color: #eee;
@@ -47,5 +69,12 @@
     line-height: 1.6rem;
     border-radius: .12rem;
     text-indent: .5rem;
+  }
+  .swiper-area {
+    clear: both;
+    width: 100%;
+    height: 0;
+    padding-bottom: 44.6%;
+    overflow: hidden;
   }
 </style>

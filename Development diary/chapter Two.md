@@ -50,3 +50,29 @@
 ```
 
 ## 2.4 轮播图制作
+### 2.4.1引入Vant-Swipe
+```
+  Vue {Swipe,SwipeItem} from 'vant'
+  Vue.use(Swipe).use(SwipeItem)
+```
+使用for循环+轮播实现图片无缝轮播
+```
+<van-swipe :autoplay="3000">
+  <van-swipe-item v-for="(item,index) in bannerPicArray" :key="index">
+    <img :src="item.imgUrl">
+  </van-swipe-item>
+</van-swipe>
+```
+出了一个小bug，刚加载进来会有图片拉长，解决方案：
+```
+  .swipwer-area
+    width: 100%
+    height: 0
+    padding-bottom: （长度/宽度 ）%
+    overflow: hidden
+    clear: both
+```
+还需要注意的是vant的轮播是自带浮动的，所以要注意清除浮动；<br>
+实现懒加载，需要到main.js再次引入vant的 `lazy-load`<br>
+第二章结束，撒花~~~~~！ <br>
+下面开始mock的使用；

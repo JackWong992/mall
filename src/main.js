@@ -7,9 +7,9 @@ import './assets/styles/reset.css'
 import './assets/styles/border.css'
 import './assets/styles/iconfont.css'
 
-import {Button, Col, Row} from 'vant'
+import {Button, Col, Row, Swipe, SwipeItem, Lazyload } from 'vant'
 
-Vue.use(Button).use(Row).use(Col)
+Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
