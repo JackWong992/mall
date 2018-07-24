@@ -25,6 +25,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: 'ShoppingMall',
     data() {
@@ -45,6 +46,16 @@
             }
         ]
       }
+    },
+    created () {
+      axios({
+        url: 'http://yapi.demo.qunar.com/mock/14714/mall/index',
+        method: 'get'
+      }).then( response=>{
+        console.log(response)
+      }).catch( error=>{
+        console.log(error)
+      })
     }
   }
 </script>
