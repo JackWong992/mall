@@ -13,14 +13,25 @@
         </van-col>      
       </van-row>
     </div>
-  <!-- swiper area -->
+    <!-- swiper area -->
     <div class="swiper-area">
       <van-swipe :autoplay="5000">
-        <van-swipe-item v-for="item in bannerPicArray" :key="item.id">
-          <img v-lazy="item.imageUrl" width="100%">
+        <van-swipe-item v-for="item in bannerPicArray" :key="item.goodsId">
+          <img v-lazy="item.image" width="100%">
         </van-swipe-item>
       </van-swipe>
     </div>
+    <!-- type bar  -->
+    <div class="type-bar">
+      <div v-for="(cate,index) in category" :key="index">
+        <div class="img">
+          <img v-lazy="cate.image" width="90%">          
+        </div>
+        <span>{{cate.mallCategoryName}}</span>
+      </div>
+    </div>
+    <!-- adBanner -->
+    <div class="advertise"><img v-lazy="adBanner" width="100%"></div>
   </div>
 </template>
 
@@ -31,20 +42,9 @@
     data() {
       return {
         msg : 'Shopping Mall',
-        bannerPicArray: [
-          { 
-            id: '001',
-            imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic001.jpg'
-            },
-          { 
-            id: '002',
-            imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic002.jpg'
-            },
-          { 
-            id: '003',
-            imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic003.jpg'
-            }
-        ]
+        bannerPicArray: [],
+        category: [],
+        adBanner: ""
       }
     },
     created () {
@@ -53,6 +53,11 @@
         method: 'get'
       }).then( response=>{
         console.log(response)
+        if(response.status ===200){
+          this.bannerPicArray = response.data.data.slides
+          this.category = response.data.data.category
+          this.adBanner = response.data.data.advertesPicture.PICTURE_ADDRESS
+        }
       }).catch( error=>{
         console.log(error)
       })
@@ -87,5 +92,26 @@
     height: 0;
     padding-bottom: 44.6%;
     overflow: hidden;
+  }
+  .type-bar {
+    background-color: #fff;
+    display: flex;
+    margin: .3rem;
+    margin-top: 0;
+    border-radius: .3rem;
+    font-size: 14px;
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+  .type-bar .img {
+    padding-bottom: .35rem;
+  }
+  .type-bar div {    
+    text-align: center;
+    font-size: 12px;
+    padding: .3rem;    
+  }
+  .advertise {
+    padding-bottom: .3rem;
   }
 </style>
