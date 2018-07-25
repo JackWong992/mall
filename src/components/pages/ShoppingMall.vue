@@ -41,7 +41,7 @@
               <div class="recommend-item">
                 <img :src="item.image" width="80%">
                 <div>{{item.goodsName}}</div>
-                <div>￥{{item.price}}(￥{{item.mallPrice}})</div>
+                <div>￥{{item.price|moneyFilter }}(￥{{item.mallPrice|moneyFilter }})</div>
               </div>
             </swiper-slide>
           </swiper>
@@ -61,7 +61,23 @@
                     :floorTitle="floorName.floor3"
                     :floorNumber="floorName.floortitle3">
                     </floor-component>
-    
+    <!-- hotGoods area -->
+    <div class="hot-area">
+      <div class="hot-title"><span class='hot'>火</span> 热卖商品</div>
+      <div class="hot-goods">
+        <!-- list 组件 -->
+        <van-list>
+          <van-row gutter="20">
+            <van-col span="12" v-for="(item,index) in hotGoods" :key="index">
+              <goods-info :goodsName="item.name"
+                          :goodsPrice="item.price"
+                          :goodsImage="item.image"
+              ></goods-info>
+            </van-col>
+          </van-row>
+        </van-list>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -70,6 +86,8 @@
   import 'swiper/dist/css/swiper.css'  
   import {swiper,swiperSlide} from 'vue-awesome-swiper'
   import floorComponent from '../component/floorComponent'
+  import {toMoney} from '@/filter/moneyFilter.js'
+  import goodsInfo from '../component/goodsInfoComponent'
   export default {
     name: 'ShoppingMall',
     data() {
@@ -86,13 +104,20 @@
         floor2: [],
         floor3: [],
         floorName: {},
-        floorNumber: {}
+        floorNumber: {},
+        hotGoods: []
       }
     },
     components: {
       swiper,
       swiperSlide,
       floorComponent,
+      goodsInfo
+    },
+    filters: {
+        moneyFilter(money){
+          return toMoney(money)
+       }
     },
     created () {
       axios({
@@ -110,6 +135,7 @@
           this.floor3 = response.data.data.floor3
           this.floorName = response.data.data.floorName
           this.floorNumber = response.data.data.floorName
+          this.hotGoods = response.data.data.hotGoods 
         }
       }).catch( error=>{
         console.log(error)
@@ -187,5 +213,20 @@
     font-size: 12px;
     text-align: center;
   }
-  
+  .hot-area {
+    text-align: center;
+    font-size:14px;
+    height:1.8rem;
+    line-height: 1.8rem;
+  }
+  .hot-title .hot {
+    color: #fff;
+    display: inline-block;
+    background: #d93f26;
+    margin-right: .5rem;
+    border-radius: 50%;
+    width: 1.4rem;
+    height: 1.4rem;
+    line-height: 1.5rem;
+  }
 </style>

@@ -6,7 +6,7 @@
 1.  [项目前置](https://github.com/JackWong992/mall/blob/master/Development%20diary/chapter%20One.md)
 2. [首页布局](https://github.com/JackWong992/mall/blob/master/Development%20diary/chapter%20Two.md)
 3. [mock初使用实现广告条 && 分类栏 ](https://github.com/JackWong992/mall/blob/master/Development%20diary/chapter%20Three.md)
-
+4. [首页：推荐，楼层组件的开发 ](https://github.com/JackWong992/mall/blob/master/Development%20diary/chapter%20Four.md)
 ## Build Setup / 打包与上线
 
 ``` bash
