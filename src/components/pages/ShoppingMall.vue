@@ -82,12 +82,13 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import axios from 'axios'     
   import 'swiper/dist/css/swiper.css'  
   import {swiper,swiperSlide} from 'vue-awesome-swiper'
-  import floorComponent from '../component/floorComponent'
-  import {toMoney} from '@/filter/moneyFilter.js'
-  import goodsInfo from '../component/goodsInfoComponent'
+  import floorComponent from '../component/floorComponent' //楼层组件
+  import {toMoney} from '@/filter/moneyFilter.js'  //金额过滤
+  import goodsInfo from '../component/goodsInfoComponent'  //首页商品list组件
+  import url from '@/serviceAPI.config.js'  //商品服务配置
   export default {
     name: 'ShoppingMall',
     data() {
@@ -121,7 +122,7 @@
     },
     created () {
       axios({
-        url: 'http://yapi.demo.qunar.com/mock/14714/mall/index',
+        url: url.getShopingMallInfo,
         method: 'get'
       }).then( response=>{
         console.log(response)
