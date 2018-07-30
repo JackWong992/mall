@@ -10,7 +10,12 @@
 5. [Koa2后端开发 ](https://github.com/JackWong992/mall/blob/master/Development%20diary/chapter%20Five.md)
     * 服务接口API配置文件
     * 安装koa2与MongoDB到项目中
-    * Koa2使用Mongoose链接数     
+    * Koa2使用Mongoose链接数据库
+    * 增加链接数据库的健壮性  
+    * 载入Schema的插入与查询
+    * 使用bcrypt对数据进行加密加盐处理  
+6. [登录模块开发 ](https://github.com/JackWong992/mall/blob/master/Development%20diary/chapter%20Six.md) 
+    * 编写注册页面
 ## Build Setup / 打包与上线
 
 ``` bash
