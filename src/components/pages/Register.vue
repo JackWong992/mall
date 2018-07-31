@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-nav-bar
-      title="立即注册"
+      title="注册页面"
       left-text="返回"
       left-arrow
       @click-left="goBack"
@@ -24,7 +24,7 @@
       />
       <!-- register-button area -->
       <div class="register-button">
-        <van-button type="primary" size="large">主要按钮</van-button>
+        <van-button type="primary" size="large">立即注册</van-button>
       </div>
     </div>
     

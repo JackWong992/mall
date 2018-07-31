@@ -64,3 +64,33 @@ Register：
   }
 </style>
 ```
+
+## 6.2 Koa2用户操作路由模块化
+首先在`service`目录下安装 `koa-router`插件用于控制后端路由，mkdir appApi -> cd appApi ->touch user.js添加配置：
+```javascript
+const Router = require ('koa-router')
+let router = new Router()
+router.get('/',async(ctx)=>{
+    ctx.body="这是用户操作首页"
+})
+router.get('/register',async(ctx)=>{
+    ctx.body="用户注册接口"
+})
+module.exports=router;
+```
+主页面需要引入配置的路由：
+```javascript
+  const Router = require('koa-router')
+  let user = require('./appApi/user.js')
+```
+加载子路由：
+```javascript
+  let router = new Router()
+  router.use('/user',user.routers())
+```
+加载中间件：
+```javascript
+  app.use(router.routes())
+  app.use( router.allowedMethods )
+```
+启动`node index.js`进行测试，进入`localhos:3000/user`，`localhost:3000/user/register`进行测试；
