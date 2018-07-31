@@ -16,6 +16,8 @@
     * 使用bcrypt对数据进行加密加盐处理  
 6. [登录模块开发 ](https://github.com/JackWong992/mall/blob/master/Development%20diary/chapter%20Six.md) 
     * 编写注册页面
+    * 使用koa-router实现用户操作模块化
+    * 前后端通讯
 ## Build Setup / 打包与上线
 
 ``` bash

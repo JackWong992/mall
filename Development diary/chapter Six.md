@@ -94,3 +94,14 @@ module.exports=router;
   app.use( router.allowedMethods )
 ```
 启动`node index.js`进行测试，进入`localhos:3000/user`，`localhost:3000/user/register`进行测试；
+
+## 6.3  实现前后端通讯
+### 安装中间件`koa-bodyparser`用于接受post数据
+```javascript
+  npm i  koa-bodyparser --save
+```
+引入：
+```javascript
+  const bodyParser = require('koa-bodyparser')
+  app.use(bodyParser()) 
+```
