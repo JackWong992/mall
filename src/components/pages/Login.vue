@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-nav-bar
-      title="注册页面"
+      title="登录页面"
       left-text="返回"
       left-arrow
       @click-left="goBack"
@@ -26,12 +26,10 @@
       />
       <!-- register-button area -->
       <div class="register-button">
-        <van-button type="primary" size="large" @click="registerAction"
-        
-        :loading="openLoading">立即注册</van-button>
+        <van-button type="primary" size="large" @click="loginAction"
+        :loading="openLoading">登录</van-button>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -53,7 +51,7 @@
        goBack(){
         this.$router.go(-1)
       },
-      registerAction(){
+      loginAction(){
         // if(this.checkForm()){
         //   this.axiosRegisterUser()
         // }
@@ -63,26 +61,17 @@
       axiosRegisterUser(){
         this.openLoading = true
         axios({
-          url: url.registerUser, 
+          url: url.login, 
           method: 'post',
           data: {
             userName: this.username,
             password: this.password
           }
         }).then( (response)=>{          
-          if(response.data.code==200){
-            Toast.success(response.data.message)
-            this.$router.push('/')
-          }else{
-            this.openLoading = false
-            Toast.fail('注册失败-1')
-           
-          }
+            console.log( response )
         }).catch( (error)=>{
-          console.log( error )
-          this.openLoading = false
-          Toast.fail('注册失败-2')
-        } )
+          
+        })
       },
       //用户注册表单验证方法
       checkForm(){
