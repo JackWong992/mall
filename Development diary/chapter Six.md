@@ -105,3 +105,5 @@ module.exports=router;
   const bodyParser = require('koa-bodyparser')
   app.use(bodyParser()) 
 ```
+
+## 6.5 防止重复提交
