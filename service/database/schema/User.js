@@ -26,6 +26,7 @@ const SALT_WORK_FACTOR = 10
     })
   })
 
+//登录服务逻辑
   userSchema.methods = {
     comparePassword: (_password, password)=>{
       return new Promise( (resolve, reject)=>{
