@@ -72,6 +72,7 @@
               <goods-info :goodsName="item.name"
                           :goodsPrice="item.price"
                           :goodsImage="item.image"
+                          :goodsId ="item.goodsId"
               ></goods-info>
             </van-col>
           </van-row>

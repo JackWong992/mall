@@ -1,26 +1,90 @@
-const Router = require('koa-router')
-let router = new Router()
+const Router = require("koa-router");
+let router = new Router();
 
-const mongoose = require('mongoose')
-const fs = require('fs')
+const mongoose = require("mongoose");
+const fs = require("fs");
 
-router.get('/insertAllGoodsInfo', async(ctx)=>{
-  fs.readFile('./newGoods.json','utf8',(err,data)=>{
-    data = JSON.parse(data)
-    let saveCount = 0
-    const Goods = mongoose.model('Goods')
-    data.map( (value, index)=>{
-      console.log( value )
-      let newGoods = new Goods(value)
-      newGoods.save().then(  ()=>{
-        saveCount++
-        console.log( '成功'+saveCount )
-      }).catch( err=>{ 
-        console.log(error)
-      })
+//1---插入商品数据
+router.get("/insertAllGoodsInfo", async ctx => {
+  fs.readFile("./data_json/newGoods.json", "utf8", (err, data) => {
+    data = JSON.parse(data);
+    let saveCount = 0;
+    const Goods = mongoose.model("Goods");
+    data.map((value, index) => {
+      console.log(value);
+      let newGoods = new Goods(value);
+      newGoods
+        .save()
+        .then(() => {
+          saveCount++;
+          console.log("成功" + saveCount);
+        })
+        .catch(err => {
+          console.log(error);
+        });
+    });
+  });
+  ctx.body = "开始导入数据";
+});
+
+//2---插入category数据
+router.get("/insertAllCategory", async ctx => {
+  fs.readFile("./data_json/category.json", "utf8", (err, data) => {
+    data = JSON.parse(data);
+    let saveCount = 0;
+    const Category = mongoose.model("Category");
+    data.RECORDS.map((value, index) => {
+      console.log(value);
+      let newCategory = new Category(value);
+      newCategory
+        .save()
+        .then(() => {
+          saveCount++;
+          console.log("插入成功:" + saveCount);
+        })
+        .catch(error => {
+          console.log("插入失败:" + error);
+        });
+    });
+  });
+  ctx.body = "开始导入数据...";
+});
+
+//3---插入categorySub数据
+router.get("/insertAllCategorySub", async ctx => {
+  fs.readFile("./data_json/category_sub.json", "utf8", (err, data) => {
+    data = JSON.parse(data);
+    let saveCount = 0;
+    const CategorySub = mongoose.model("CategorySub");
+    data.RECORDS.map((value, index) => {
+      console.log(value);
+      let newCategorySub = new CategorySub(value);
+      newCategorySub
+        .save()
+        .then(() => {
+          saveCount++;
+          console.log("插入成功:" + saveCount);
+        })
+        .catch(error => {
+          console.log("插入失败:" + error);
+        });
+    });
+  });
+  ctx.body = "开始导入数据...";
+});
+
+//4---获取商品详情页面
+router.post("/getDetailGoodsInfo", async ctx => {
+  let goodsId = ctx.request.body.goodsId;
+  const Goods = mongoose.model("Goods");
+  await Goods.findOne({ ID: goodsId })
+    .exec()
+    .then(async result => {
+      ctx.body = { code: 200, message: result };
     })
-  })
-  ctx.body = '开始导入数据'
-})
-
-module.exports = router
+    .catch(error => {
+      console.log(error);
+      ctx.body = { code: 500, message: error };
+    });
+});
+module.exports = router;
