@@ -11,7 +11,6 @@ import {Button, Col, Row, Swipe, SwipeItem, Lazyload, List, Field, NavBar,Tab, T
 
 Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload).use(List).use(Field).use(NavBar).use(Tab).use(Tabs)
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
