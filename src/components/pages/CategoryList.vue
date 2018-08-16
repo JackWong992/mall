@@ -19,10 +19,19 @@
           </div>
         </van-col>
         <van-col span="18">
-          <div class="tabCategorySub">
-            <van-tabs v-model="active">
+          <div class="tabCategorySub ">
+            <van-tabs v-model="active" class="tab-list">
               <van-tab  v-for="(item,index) in categorySub" :key="index" :title="item.MALL_SUB_NAME"></van-tab>
             </van-tabs>
+          </div>
+          <div class="list">
+            <van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
+            <van-list v-model="loading" :finished="finished" @load="onLoad">
+              <div class="item" v-for="item in list" :key="item">
+                {{item}}
+              </div>
+            </van-list>
+            </van-pull-refresh>
           </div>
         </van-col>
       </van-row>
@@ -39,7 +48,11 @@ export default {
       category: [],
       categoryIndex: 0,
       categorySub: [], //商品类别子类信息
-      active: 0 //激活标签的数值
+      active: 0, //激活标签的数值
+      loading: false, //上拉加载使用
+      finished: false, //下拉加载是否没有数据了
+      list: [],
+      isRefresh: false
     };
   },
   created() {
@@ -49,6 +62,8 @@ export default {
     let winHeight = document.documentElement.clientHeight;
     document.getElementsByClassName("leftNav")[0].style.height =
       winHeight - 50 + "px";
+    document.getElementsByClassName("list")[0].style.height =
+      winHeight - 90 + "px";
   },
   methods: {
     getCategory() {
@@ -60,7 +75,7 @@ export default {
           console.log(response);
           if (response.data.code === 200 && response.data.message) {
             this.category = response.data.message;
-            this.getCategoryByCategoryID(this.category[0].ID)
+            this.getCategoryByCategoryID(this.category[0].ID);
           } else {
             Toast("服务器数据异常");
           }
@@ -94,12 +109,33 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    //上拉加载
+    onLoad() {
+      setTimeout(() => {
+        for (let i = 0; i < 10; i++) {
+          this.list.push(this.list.length + 1);
+        }
+        this.loading = false;
+        if (this.list.length >= 40) {
+          this.finished = true;
+        }
+      }, 800);
+    },
+    onRefresh() {
+      setTimeout(() => {
+        this.isRefresh = false
+        this.finished = false
+        this.list = []
+        this.onLoad()
+      }, 800);
     }
   }
 };
 </script>
 
 <style scoped>
+
 .leftNav {
   background: aliceblue;
   text-align: center;
@@ -112,5 +148,17 @@ export default {
 }
 .categoaryActive {
   background: #fff;
+}
+.list {
+  overflow: scroll;
+}
+.item {
+  text-align: center;
+  line-height: 80px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #fff;
+}
+.tab-list {
+  color: red;
 }
 </style>
